@@ -1,0 +1,23 @@
+{
+  "name": "my-npm-package",
+  "version": "1.0.0",
+  "description": "TNAF zaj4 zad1",
+  "main": "main.js",
+  "scripts": {
+    "test": "console.log(\"testowa komenda\")"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://Yukinevv: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@github.com/Yukinevv/TNAF-Zajecia4.git"
+  },
+  "keywords": [
+    "TNAF",
+    "Zajecia4"
+  ],
+  "author": "Adrian Rodzic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yukinevv/TNAF-Zajecia4/issues"
+  },
+  "homepage": "https://github.com/Yukinevv/TNAF-Zajecia4#readme"
+}
