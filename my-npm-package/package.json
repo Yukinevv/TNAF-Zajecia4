@@ -19,5 +19,9 @@
   "bugs": {
     "url": "https://github.com/Yukinevv/TNAF-Zajecia4/issues"
   },
-  "homepage": "https://github.com/Yukinevv/TNAF-Zajecia4#readme"
+  "homepage": "https://github.com/Yukinevv/TNAF-Zajecia4#readme",
+  "devDependencies": {
+    "parcel": "^2.8.1"
+  },
+  "start": "parcel.src/index.html --open"
 }
