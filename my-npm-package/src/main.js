@@ -24,7 +24,7 @@ setInterval(() => {
 function updateCiasteczka(value) {
     ciasteczka += value;
 
-    ciasteczkaPerClickSpan.innerHTML = ciasteczka;
+    ciasteczkaPerClickSpan.innerHTML = Math.floor(ciasteczka);
     ciasteczkaPerSecondsSpan.innerHTML = ciasteczkaPerSeconds;
 
     if (ciasteczka >= 10) {
