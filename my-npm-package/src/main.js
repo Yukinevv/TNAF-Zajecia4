@@ -11,16 +11,18 @@ const levelUpButtons = document.querySelectorAll(".white-button");
 const cookiesPerClickSpan = document.querySelector("#cookies-per-click");
 const cookiesPerSecondsSpan = document.querySelector("#cookies-per-seconds");
 
+const cookieInterval = setInterval(() => { updateCookies(cookiesPerSeconds); }, 1000);
+
+window.onbeforeunload = function () {
+    clearInterval(cookieInterval);
+};
+
 levelUpButton.addEventListener('click', e => {
     e.preventDefault();
 
     updateCookies(1);
     console.log(cookies);
 });
-
-setInterval(() => {
-    updateCookies(cookiesPerSeconds);
-}, 1000);
 
 function updateCookies(value) {
     cookies += value;
