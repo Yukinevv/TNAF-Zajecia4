@@ -1,137 +1,49 @@
-let ciasteczka = 0;
-let ciasteczkaPerSeconds = 0;
+let cookies = 0;
+let cookiesPerSeconds = 0;
+
+let levels = [0, 0, 0, 0, 0];
+const upgrades = [0.1, 1, 5, 10, 100];
+const costs = [10, 100, 1000, 5000, 100000];
 
 const levelUpButton = document.querySelector(".round-button");
-
 const textAreaWhite = document.querySelector(".text-area-white");
-
 const levelUpButtons = document.querySelectorAll(".white-button");
-
-const ciasteczkaPerClickSpan = document.querySelector("#ciasteczka-per-click");
-const ciasteczkaPerSecondsSpan = document.querySelector("#ciasteczka-per-seconds");
+const cookiesPerClickSpan = document.querySelector("#cookies-per-click");
+const cookiesPerSecondsSpan = document.querySelector("#cookies-per-seconds");
 
 levelUpButton.addEventListener('click', e => {
     e.preventDefault();
 
-    updateCiasteczka(1);
-    console.log(ciasteczka);
+    updateCookies(1);
+    console.log(cookies);
 });
 
 setInterval(() => {
-    updateCiasteczka(ciasteczkaPerSeconds);
+    updateCookies(cookiesPerSeconds);
 }, 1000);
 
-function updateCiasteczka(value) {
-    ciasteczka += value;
+function updateCookies(value) {
+    cookies += value;
+    cookiesPerClickSpan.innerHTML = Math.floor(cookies);
+    cookiesPerSecondsSpan.innerHTML = cookiesPerSeconds.toFixed(1);
 
-    ciasteczkaPerClickSpan.innerHTML = Math.floor(ciasteczka);
-    ciasteczkaPerSecondsSpan.innerHTML = ciasteczkaPerSeconds;
-
-    if (ciasteczka >= 10) {
-        levelUpButtons[0].classList.add("active");
-    }
-    else
-        levelUpButtons[0].classList.remove("active");
-
-    if (ciasteczka >= 100) {
-        levelUpButtons[1].classList.add("active");
-    }
-    else
-        levelUpButtons[1].classList.remove("active");
-
-    if (ciasteczka >= 1000) {
-        levelUpButtons[2].classList.add("active");
-    }
-    else
-        levelUpButtons[2].classList.remove("active");
-
-    if (ciasteczka >= 5000) {
-        levelUpButtons[3].classList.add("active");
-    }
-    else
-        levelUpButtons[3].classList.remove("active");
-
-    if (ciasteczka >= 100000) {
-        levelUpButtons[4].classList.add("active");
-    }
-    else
-        levelUpButtons[4].classList.remove("active");
-
-    //levelUpButtons[0].classList.toggle("active", ciasteczka > 10);
+    for (let i = 0; i < levelUpButtons.length; i++)
+        levelUpButtons[i].classList.toggle("active", cookies >= costs[i] + levels[i] * 0.3 * costs[i]);
 }
 
-let poziomy = [0, 0, 0, 0, 0];
+for (let i = 0; i < levelUpButtons.length; i++) {
+    levelUpButtons[i].addEventListener('click', e => {
+        e.preventDefault();
 
-levelUpButtons[0].addEventListener('click', e => {
-    e.preventDefault();
+        if (cookies < costs[i] + levels[i] * 0.3 * costs[i]) {
+            alert("Nie posiadasz wystarczajacej ilosci ciasteczek!");
+            return;
+        }
+        cookiesPerSeconds += upgrades[i];
+        console.log(cookiesPerSeconds);
 
-    if (ciasteczka < 10 + poziomy[0] * 0.3 * 10) {
-        alert("Nie posiadasz wystarczajacej ilosci ciasteczek!");
-        return;
-    }
-    ciasteczkaPerSeconds += 0.1;
-    console.log(ciasteczkaPerSeconds);
-
-    ciasteczka -= 10 + poziomy[0] * 0.3 * 10;
-    poziomy[0] = 1;
-    alert("Kupiles ulepszenie + 0.1 ciasteczek na sekunde");
-});
-
-levelUpButtons[1].addEventListener('click', e => {
-    e.preventDefault();
-
-    if (ciasteczka < 100 + poziomy[1] * 0.3 * 100) {
-        alert("Nie posiadasz wystarczajacej ilosci ciasteczek!");
-        return;
-    }
-    ciasteczkaPerSeconds += 1;
-    console.log(ciasteczkaPerSeconds);
-
-    ciasteczka -= 100 + poziomy[1] * 0.3 * 100;
-    poziomy[1] = 1;
-    alert("Kupiles ulepszenie + 1 ciasteczek na sekunde");
-});
-
-levelUpButtons[2].addEventListener('click', e => {
-    e.preventDefault();
-    if (ciasteczka < 1000 + poziomy[2] * 0.3 * 1000) {
-        alert("Nie posiadasz wystarczajacej ilosci ciasteczek!");
-        return;
-    }
-
-    ciasteczkaPerSeconds += 5;
-    console.log(ciasteczkaPerSeconds);
-
-    ciasteczka -= 1000 + poziomy[2] * 0.3 * 1000;
-    alert("Kupiles ulepszenie + 5 ciasteczek na sekunde");
-});
-
-levelUpButtons[3].addEventListener('click', e => {
-    e.preventDefault();
-
-    if (ciasteczka < 5000 + poziomy[3] * 0.3 * 5000) {
-        alert("Nie posiadasz wystarczajacej ilosci ciasteczek!");
-        return;
-    }
-
-    ciasteczkaPerSeconds += 10;
-    console.log(ciasteczkaPerSeconds);
-
-    ciasteczka -= 5000 + poziomy[3] * 0.3 * 5000;
-    alert("Kupiles ulepszenie + 10 ciasteczek na sekunde");
-});
-
-levelUpButtons[4].addEventListener('click', e => {
-    e.preventDefault();
-
-    if (ciasteczka < 100000 + poziomy[4] * 0.3 * 100000) {
-        alert("Nie posiadasz wystarczajacej ilosci ciasteczek!");
-        return;
-    }
-    ciasteczkaPerSeconds += 100;
-    console.log(ciasteczkaPerSeconds);
-
-    ciasteczka -= 100000 + poziomy[4] * 0.3 * 100000;
-    alert("Kupiles ulepszenie + 100 ciasteczek na sekunde");
-});
-
+        cookies -= costs[i] + levels[i] * 0.3 * costs[i];
+        levels[i] = 1;
+        alert("Kupiles ulepszenie " + upgrades[i].toString() + " ciasteczek na sekunde");
+    });
+}

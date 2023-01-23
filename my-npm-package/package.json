@@ -4,7 +4,7 @@
   "description": "TNAF zaj4 zad1",
   "main": "main.js",
   "scripts": {
-    "test": "console.log(\"testowa komenda\")",
+    "test": "echo test przy starcie",
     "start": "parcel ./src/index.html --open"
   },
   "repository": {
